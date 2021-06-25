@@ -1,11 +1,14 @@
-# SSLCOMMERZ Payment Gateway implementation in Python
+# SSLCOMMERZ Payment Gateway Python API [![Publish Python Package](https://github.com/dreygur/SSLCommerz-Python/actions/workflows/publish.yml/badge.svg)](https://github.com/dreygur/SSLCommerz-Python/actions/workflows/publish.yml)
 Provides a python module to implement payment gateway in python based web apps.
 
 ## Installation
 Via PIP
-
 ```sh
-pip install git+https://github.com/dreygur/sslcommerz-payment-gateway-python.git
+pip install sslcommerz-python-api
+```
+or
+```sh
+pip install git+https://github.com/dreygur/SSLCommerz-Python.git
 ```
 
 ## Projected use
