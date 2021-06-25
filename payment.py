@@ -7,8 +7,8 @@ import hashlib
 
 from sslcommerz_python import SSLCZ_SESSION_API, SSLCZ_VALIDATION_API
 
-# SSLCZ_SESSION_API = 'sslcommerz.com/gwprocess/v4/api.php'
-# SSLCZ_VALIDATION_API = 'sslcommerz.com/validator/api/validationserverAPI.php'
+SSLCZ_SESSION_API = 'sslcommerz.com/gwprocess/v4/api.php'
+SSLCZ_VALIDATION_API = 'sslcommerz.com/validator/api/validationserverAPI.php'
 
 class SSLCommerz:
     def __init__(self, sslc_is_sandbox=True, sslc_store_id='', sslc_store_pass='') -> None:
