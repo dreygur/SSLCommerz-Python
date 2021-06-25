@@ -5,13 +5,18 @@ import requests
 import json
 import hashlib
 
-# from sslcommerz_python import SSLCZ_SESSION_API, SSLCZ_VALIDATION_API
-
 SSLCZ_SESSION_API = 'sslcommerz.com/gwprocess/v4/api.php'
 SSLCZ_VALIDATION_API = 'sslcommerz.com/validator/api/validationserverAPI.php'
 
 class SSLCommerz:
     def __init__(self, sslc_is_sandbox=True, sslc_store_id='', sslc_store_pass='') -> None:
+        """Create a session
+
+        Args:
+            sslc_is_sandbox (bool, optional): Sandbox or live api. Defaults to True.
+            sslc_store_id (str, optional): Store ID.
+            sslc_store_pass (str, optional): Store Password.
+        """
         self.sslc_mode_name = self.set_sslcommerz_mode(sslc_is_sandbox)
         self.sslc_is_sandbox = sslc_is_sandbox
         self.sslc_store_id = sslc_store_id
