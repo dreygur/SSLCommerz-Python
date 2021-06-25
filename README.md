@@ -31,11 +31,9 @@ response_data = mypayment.init_payment()
 
 ## Response parameters
 ### When Successfull with Auth and Payloads provided
-> status
-
-> sessionkey
-
-> GatewayPageURL
+- status
+- sessionkey
+- GatewayPageURL
 
 #### Example
 ```python
@@ -48,9 +46,8 @@ https://sandbox.sslcommerz.com/EasyCheckOut/testcdef650e87f23dd2a8ffcb4234fasf3b
 ```
 
 ### When Failed
-> status
-
-> failedreason
+- status
+- failedreason
 
 #### Example
 ```python
