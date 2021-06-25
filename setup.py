@@ -6,14 +6,14 @@ with open('requirements.txt') as f:
     requirements = f.read().splitlines()
 
 setuptools.setup(
-    name="sslcommerz-python",
-    version="0.0.6",
-    author="Shahed Mehbub",
-    author_email="shahed739@gmail.com",
+    name="sslcommerz-python-api",
+    version="0.0.3",
+    author="Rakibul Yeasin",
+    author_email="ryeasin@gmail.com",
     description="Implements SSLCOMMERZ payment gateway in python based web apps.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/shahedex/sslcommerz-payment-gateway-python",
+    url="https://github.com/dreygur/SSLCommerz-Python",
     packages=setuptools.find_packages(),
     install_requires=requirements,
     classifiers=[
