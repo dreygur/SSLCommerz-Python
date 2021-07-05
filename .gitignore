@@ -3,4 +3,4 @@ __pycache__
 .vscode
 build
 dist
-sslcommerz_python.egg-info/
+sslcommerz_*
