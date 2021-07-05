@@ -1,17 +1,23 @@
 # SSLCOMMERZ Payment Gateway Python API [![Publish Python Package](https://github.com/dreygur/SSLCommerz-Python/actions/workflows/publish.yml/badge.svg)](https://github.com/dreygur/SSLCommerz-Python/actions/workflows/publish.yml)
+
 Provides a python module to implement payment gateway in python based web apps.
 
 ## Installation
+
 Via PIP
+
 ```sh
 pip install sslcommerz-python-api
 ```
+
 or via git
+
 ```sh
 pip install git+https://github.com/dreygur/SSLCommerz-Python.git
 ```
 
 ## Projected use
+
 ```python3
 #!usr/bin/env python
 
@@ -74,16 +80,21 @@ print(response_data)
 ```
 
 ## Response parameters
+
 ### When Successfull with Auth and Payloads provided
+
 - status
 - sessionkey
 - GatewayPageURL
 
 #### Example
+
 ```sh
-{'status': 'FAILED', 'failedreason': 'Store Credential Error Or Store is De-active'}
+{'status': 'SUCCESS', 'sessionkey': 'F650E87F23DD2A8FFCB4E4E333C13B28', 'GatewayPageURL': 'https://sandbox.sslcommerz.com/EasyCheckOut/testcdef650e87f23dd2a8ffcb4234fasf3b28'}
 ```
+
 or
+
 ```python
 >>> response_data['status']
 SUCCESS
@@ -94,10 +105,18 @@ https://sandbox.sslcommerz.com/EasyCheckOut/testcdef650e87f23dd2a8ffcb4234fasf3b
 ```
 
 ### When Failed
+
 - status
 - failedreason
 
 #### Example
+
+```sh
+{'status': 'FAILED', 'failedreason': 'Store Credential Error Or Store is De-active'}
+```
+
+or
+
 ```python
 >>> response_data['status']
 FAILED
