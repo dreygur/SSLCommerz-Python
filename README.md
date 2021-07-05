@@ -13,7 +13,7 @@ pip install sslcommerz-python-api
 or via git
 
 ```sh
-pip install git+https://github.com/dreygur/SSLCommerz-Python.git@dev
+pip install git+https://github.com/dreygur/SSLCommerz-Python.git
 ```
 
 ## Projected use
