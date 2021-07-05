@@ -7,7 +7,7 @@ with open('requirements.txt') as f:
 
 setuptools.setup(
     name="sslcommerz-python-api",
-    version="0.0.5",
+    version="0.0.6",
     author="Rakibul Yeasin",
     author_email="ryeasin03@gmail.com",
     description="Implements SSLCOMMERZ payment gateway in python based web apps.",
