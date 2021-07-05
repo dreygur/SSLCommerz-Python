@@ -9,11 +9,11 @@ setuptools.setup(
     name="sslcommerz-python-api",
     version="0.0.3",
     author="Rakibul Yeasin",
-    author_email="ryeasin@gmail.com",
+    author_email="ryeasin03@gmail.com",
     description="Implements SSLCOMMERZ payment gateway in python based web apps.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/dreygur/SSLCommerz-Python",
+    url="https://github.com/dreygur/SSLCommerz-Python-api",
     packages=setuptools.find_packages(),
     install_requires=requirements,
     classifiers=[
