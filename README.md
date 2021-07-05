@@ -6,14 +6,10 @@ Via PIP
 ```sh
 pip install sslcommerz-python-api
 ```
-or
-```sh
-pip install git+https://github.com/dreygur/SSLCommerz-Python.git
-```
 
 ## Projected use
 ```python3
-from sslcommerz_python.payment import SSLCSession
+from sslcommerz_python_api.payment import SSLCSession
 from decimal import Decimal
 
 mypayment = SSLCSession(sslc_is_sandbox=True, sslc_store_id='your_sslc_store_id', sslc_store_pass='your_sslc_store_passcode')
