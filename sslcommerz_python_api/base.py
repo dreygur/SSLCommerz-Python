@@ -1,8 +1,5 @@
 #!/usr/bin/env python
 
-# Internal Import
-from sslcommerz_python_api import SSLCZ_SESSION_API, SSLCZ_VALIDATION_API
-
 class SSLCommerz:
   def __init__(self,
     sslc_is_sandbox: bool = True,
@@ -16,12 +13,15 @@ class SSLCommerz:
       sslc_store_id (str, optional): Store ID.
       sslc_store_pass (str, optional): Store Password.
     """
+    # Configurations
+    self.SSLCZ_SESSION_API = 'sslcommerz.com/gwprocess/v4/api.php'
+    self.SSLCZ_VALIDATION_API = 'sslcommerz.com/validator/api/validationserverAPI.php'
     self.sslc_mode_name = self.set_sslcommerz_mode(sslc_is_sandbox)
     self.sslc_is_sandbox = sslc_is_sandbox
     self.sslc_store_id = sslc_store_id
     self.sslc_store_pass = sslc_store_pass
-    self.sslc_session_api = 'https://' + self.sslc_mode_name + '.' + SSLCZ_SESSION_API
-    self.sslc_validation_api = 'https://' + self.sslc_mode_name + '.' + SSLCZ_VALIDATION_API
+    self.sslc_session_api = 'https://' + self.sslc_mode_name + '.' + self.SSLCZ_SESSION_API
+    self.sslc_validation_api = 'https://' + self.sslc_mode_name + '.' + self.SSLCZ_VALIDATION_API
     self.integration_data: Dict[str, str] = {}
 
   @staticmethod

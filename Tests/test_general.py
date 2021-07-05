@@ -1,4 +1,4 @@
-from sslcommerz_python_api.payment import SSLCSession
+from sslcommerz_python_api import SSLCSession
 from decimal import Decimal
 
 def response():
