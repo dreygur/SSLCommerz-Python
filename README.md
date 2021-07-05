@@ -80,6 +80,10 @@ print(response_data)
 - GatewayPageURL
 
 #### Example
+```sh
+{'status': 'FAILED', 'failedreason': 'Store Credential Error Or Store is De-active'}
+```
+or
 ```python
 >>> response_data['status']
 SUCCESS
