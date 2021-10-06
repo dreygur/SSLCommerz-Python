@@ -124,3 +124,6 @@ FAILED
 >>> response_data['failedreason']
 'Store Credential Error Or Store is De-active'
 ```
+
+## Acknowledgemetns
+It's a fork of [Shahed Mehbub's](https://github.com/shahedex) [sslcommerz-python](https://github.com/shahedex/sslcommerz-payment-gateway-python)
