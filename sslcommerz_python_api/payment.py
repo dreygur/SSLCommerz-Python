@@ -5,7 +5,6 @@ from decimal import Decimal
 from uuid import uuid4
 import requests
 import json
-import hashlib
 
 # Internal Import
 from sslcommerz_python_api.base import SSLCommerz
@@ -25,7 +24,7 @@ class SSLCSession(SSLCommerz):
     """
     super().__init__(sslc_is_sandbox, sslc_store_id, sslc_store_pass)
 
-  def set_urls(self, 
+  def set_urls(self,
     success_url: str,
     fail_url: str,
     cancel_url: str,
@@ -111,7 +110,7 @@ class SSLCSession(SSLCommerz):
       'cus_country': country,
       'cus_phone': phone,
     })
-      
+
   def set_shipping_info(self,
     shipping_to: str,
     address: str,
@@ -176,13 +175,13 @@ class SSLCSession(SSLCommerz):
           'failedreason': response_json['failedreason'],
         })
         return response_data
-      
+
       response_data.update({
         'status': response_json['status'],
         'sessionkey': response_json['sessionkey'],
         'GatewayPageURL': response_json['GatewayPageURL'],
       })
-      
+
       return response_data
 
     response_json = json.loads(response_sslc.text)

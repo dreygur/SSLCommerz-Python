@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+import hashlib
+import requests
+from typing import Dict
+
 # Internal Import
 from sslcommerz_python_api.base import SSLCommerz
 
