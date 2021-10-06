@@ -1,4 +1,4 @@
-# SSLCOMMERZ Payment Gateway Python API
+# SSLCOMMERZ Payment Gateway Python API [![Downloads](https://static.pepy.tech/personalized-badge/sslcommerz-python-api?period=total&units=international_system&left_color=blue&right_color=grey&left_text=Downloads)](https://pepy.tech/project/sslcommerz-python-api)
 
 Provides a python module to implement payment gateway in python based web apps.
 
