@@ -12,6 +12,14 @@ class Validation(SSLCommerz):
     super().__init__(sslc_is_sandbox, sslc_store_id, sslc_store_pass)
 
   def validate_transaction(self, validation_id):
+    """Validate the Transaction with validation_id from SSLCommerz
+
+    Args:
+      validation_id (str): Validation ID from SSLCommerz
+
+    Returns:
+      dict: Validation Status
+    """
     query_params: Dict[str, str] = {}
     response_data: Dict[str, str] = {}
     query_params['val_id'] = validation_id
