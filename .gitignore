@@ -5,3 +5,4 @@ build
 dist
 *.egg*
 .pytest*
+test_module
