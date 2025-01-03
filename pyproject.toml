@@ -1,0 +1,22 @@
+[project]
+name = "sslcommerz_python_api"
+version = "1.0.1"
+authors = [{ name = "Rakibul Yeasin", email = "ryeasin03@gmail.com" }]
+description = "Implements SSLCOMMERZ payment gateway in python based web apps."
+readme = "README.md"
+requires-python = ">=3.6"
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+]
+
+dependencies = ["urllib3>=2.3.0", "requests>=2.32.3"]
+
+[project.urls]
+Homepage = "https://github.com/ryeasin03/sslcommerz_python_api"
+Issues = "https://github.com/ryeasin03/sslcommerz_python_api/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
