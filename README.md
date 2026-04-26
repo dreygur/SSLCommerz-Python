@@ -1,129 +1,160 @@
 # SSLCOMMERZ Payment Gateway Python API
 [![Downloads](https://static.pepy.tech/personalized-badge/sslcommerz-python-api?period=total&units=international_system&left_color=blue&right_color=grey&left_text=Downloads)](https://pepy.tech/project/sslcommerz-python-api)
 
-Provides a python module to implement payment gateway in python based web apps.
+Python wrapper for the SSLCommerz payment gateway. Requires Python 3.10+.
 
 ## Installation
-
-Via PIP
 
 ```sh
 pip install sslcommerz-python-api
 ```
 
-or via git
+or from git
 
 ```sh
 pip install git+https://github.com/dreygur/SSLCommerz-Python.git
 ```
 
-## Projected use
+## Usage
 
-```python3
-#!usr/bin/env python
+### Initiate Payment
 
+```python
 from decimal import Decimal
-from sslcommerz_python_api import SSLCSession
+from uuid import uuid4
 
-mypayment = SSLCSession(
-  sslc_is_sandbox=True,
-  sslc_store_id='your_sslc_store_id',
-  sslc_store_pass='your_sslc_store_passcode'
+from sslcommerz_python_api import SSLCommerzService
+from sslcommerz_python_api.models import CustomerInfo, PaymentRequest, ShippingInfo
+
+service = SSLCommerzService.create(
+    store_id='your_store_id',
+    store_pass='your_store_pass',
+    is_sandbox=True,
 )
 
-mypayment.set_urls(
-  success_url='example.com/success',
-  fail_url='example.com/failed',
-  cancel_url='example.com/cancel',
-  ipn_url='example.com/payment_notification'
+request = PaymentRequest(
+    store_id='your_store_id',
+    store_pass='your_store_pass',
+    tran_id=str(uuid4()),
+    total_amount=Decimal('20.20'),
+    currency='BDT',
+    success_url='https://example.com/success',
+    fail_url='https://example.com/failed',
+    cancel_url='https://example.com/cancel',
+    ipn_url='https://example.com/ipn',
+    product_name='demo-product',
+    product_category='clothing',
+    num_of_item=2,
+    shipping_method='YES',
+    customer=CustomerInfo(
+        name='John Doe',
+        email='johndoe@email.com',
+        address1='demo address',
+        address2='demo address 2',
+        city='Dhaka',
+        postcode='1207',
+        country='Bangladesh',
+        phone='01711111111',
+    ),
+    shipping=ShippingInfo(
+        ship_name='demo customer',
+        address='demo address',
+        city='Dhaka',
+        postcode='1209',
+        country='Bangladesh',
+    ),
+    value_a='extra-a',
+    value_b='extra-b',
 )
 
-mypayment.set_product_integration(
-  total_amount=Decimal('20.20'),
-  currency='BDT',
-  product_category='clothing',
-  product_name='demo-product',
-  num_of_item=2,
-  shipping_method='YES',
-  product_profile='None'
-)
-
-mypayment.set_customer_info(
-  name='John Doe',
-  email='johndoe@email.com',
-  address1='demo address',
-  address2='demo address 2',
-  city='Dhaka', postcode='1207',
-  country='Bangladesh',
-  phone='01711111111'
-)
-
-mypayment.set_shipping_info(
-  shipping_to='demo customer',
-  address='demo address',
-  city='Dhaka',
-  postcode='1209',
-  country='Bangladesh'
-)
-
-# If you want to post some additional values
-mypayment.set_additional_values(
-  value_a='cusotmer@email.com',
-  value_b='portalcustomerid',
-  value_c='1234',
-  value_d='uuid'
-)
-
-response_data = mypayment.init_payment()
-
-# You can Print the response data
-print(response_data)
+response = service.initiate_payment(request)
+print(response.gateway_url)   # redirect user here
+print(response.session_key)
+print(response.is_success)    # True / False
 ```
 
-## Response parameters
+### Response
 
-### When Successfull with Auth and Payloads provided
+On success, `initiate_payment` returns a `PaymentResponse` dataclass:
 
-- status
-- sessionkey
-- GatewayPageURL
+| Field | Type | Description |
+|---|---|---|
+| `status` | `str` | `"SUCCESS"` or `"FAILED"` |
+| `session_key` | `str` | SSLCommerz session key |
+| `gateway_url` | `str` | URL to redirect the user to |
+| `is_success` | `bool` | convenience property |
 
-#### Example
+On failure, raises `SSLCommerzAPIError`.
 
-```sh
-{'status': 'SUCCESS', 'sessionkey': 'F650E87F23DD2A8FFCB4E4E333C13B28', 'GatewayPageURL': 'https://sandbox.sslcommerz.com/EasyCheckOut/testcdef650e87f23dd2a8ffcb4234fasf3b28'}
-```
-
-or
+### Validate Transaction
 
 ```python
->>> response_data['status']
-SUCCESS
->>> response_data['sessionkey']
-F650E87F23DD2A8FFCB4E4E333C13B28
->>> response_data['GatewayPageURL']
-https://sandbox.sslcommerz.com/EasyCheckOut/testcdef650e87f23dd2a8ffcb4234fasf3b28
+from sslcommerz_python_api.exceptions import SSLCommerzValidationError
+
+try:
+    result = service.validate_transaction(val_id='VAL_ID_FROM_IPN')
+    print(result.status)   # "VALIDATED"
+    print(result.data)     # full raw response dict
+except SSLCommerzValidationError as e:
+    print(f"Validation failed: {e}")
 ```
 
-### When Failed
-
-- status
-- failedreason
-
-#### Example
-
-```sh
-{'status': 'FAILED', 'failedreason': 'Store Credential Error Or Store is De-active'}
-```
-
-or
+### Verify IPN Signature
 
 ```python
->>> response_data['status']
-FAILED
->>> response_data['failedreason']
-'Store Credential Error Or Store is De-active'
+# ipn_data = POST body received from SSLCommerz webhook
+try:
+    service.verify_ipn(ipn_data)
+    # signature valid — process the order
+except SSLCommerzValidationError:
+    # signature mismatch — reject
+    pass
 ```
 
-## Acknowledgemetns
-It's a fork of [Shahed Mehbub's](https://github.com/shahedex) [sslcommerz-python](https://github.com/shahedex/sslcommerz-payment-gateway-python)
+### Error Handling
+
+```python
+from sslcommerz_python_api.exceptions import (
+    SSLCommerzAPIError,
+    SSLCommerzValidationError,
+    SSLCommerzError,
+)
+
+try:
+    response = service.initiate_payment(request)
+except SSLCommerzAPIError as e:
+    print(e.reason)        # SSLCommerz failure reason
+    print(e.status_code)   # HTTP status code if available
+except SSLCommerzError:
+    # catch-all for any library error
+    pass
+```
+
+### Logging
+
+The library logs via Python's standard `logging` module under the `sslcommerz_python_api` namespace.
+
+```python
+import logging
+
+# enable for all loggers
+logging.basicConfig(level=logging.DEBUG)
+
+# or target just this library
+logging.getLogger("sslcommerz_python_api").setLevel(logging.DEBUG)
+```
+
+| Level | Events |
+|---|---|
+| `DEBUG` | HTTP request URL + transaction/val ID before each call |
+| `DEBUG` | Response status after each call |
+| `WARNING` | Payment initiation failed (FAILED status from API) |
+| `WARNING` | Transaction not validated |
+
+## Migration from v1
+
+`SSLCSession` still works but emits a `DeprecationWarning`. Switch to `SSLCommerzService` at your convenience — the old builder API is not planned for removal in the near term.
+
+## Acknowledgements
+
+Fork of [Shahed Mehbub's](https://github.com/shahedex) [sslcommerz-python](https://github.com/shahedex/sslcommerz-payment-gateway-python).

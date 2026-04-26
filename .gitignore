@@ -1,8 +1,9 @@
-venv
-**__pycache__**
-.vscode
-build
-dist
-*.egg*
-.pytest*
-test_module
+venv/
+**/__pycache__/
+*.pyc
+.vscode/
+build/
+dist/
+*.egg-info/
+.pytest_cache/
+test_module/
