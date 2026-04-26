@@ -1,22 +1,35 @@
 [project]
 name = "sslcommerz_python_api"
-version = "1.0.1"
+version = "2.0.0"
 authors = [{ name = "Rakibul Yeasin", email = "ryeasin03@gmail.com" }]
-description = "Implements SSLCOMMERZ payment gateway in python based web apps."
+description = "SSLCommerz payment gateway wrapper for Python web applications."
 readme = "README.md"
-requires-python = ">=3.6"
+requires-python = ">=3.10"
 classifiers = [
-  "Programming Language :: Python :: 3",
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
   "License :: OSI Approved :: MIT License",
   "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Topic :: Internet :: WWW/HTTP",
 ]
 
-dependencies = ["urllib3>=2.3.0", "requests>=2.32.3"]
+dependencies = ["requests>=2.32.3"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "pytest-mock>=3.14"]
 
 [project.urls]
-Homepage = "https://github.com/ryeasin03/sslcommerz_python_api"
-Issues = "https://github.com/ryeasin03/sslcommerz_python_api/issues"
+Homepage = "https://github.com/dreygur/SSLCommerz-Python"
+Issues = "https://github.com/dreygur/SSLCommerz-Python/issues"
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
